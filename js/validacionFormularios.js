@@ -9,14 +9,14 @@ $(document).ready(function(){
             posicionX:{
                 required:true,
                 number:true,
-                max:2,
-                min:1
+                min:2,
+                max:1
             },
             posicionY:{
                 required:true,
                 number:true,
-                max:2,
-                min:1
+                min:1,
+                max:2
             },
             peso:{
                 required:true,
@@ -61,13 +61,13 @@ $(document).ready(function(){
             posicionX:{
                 required:"Define una pocision",
                 number:"Este campo es numerico",
-                max:"maximo 3 caracteres",
+                max:"maximo 2 caracteres",
                 min:"define un valor"
             },
             posicionY:{
                 required:"Define una pocision",
                 number:"Este campo es numerico",
-                max:"maximo 3 caracteres",
+                max:"maximo 2 caracteres",
                 min:"define un valor"
             },
             peso1:{

@@ -1,7 +1,11 @@
 // se definen las variables a utilizar
 const valorInputs = document.getElementById('conx');
-console.log(valorInputs);
 const divResultados = document.getElementById('mostrarResultados');
+//variables para tomar las pocisiones de las nuevas ubicaciones
+const formulario = document.getElementById('formularioUbicacion');
+const pocisionX = document.getElementById('posX');
+const pocisionY = document.getElementById('posY');
+
 
 
 //funcion para la creacion de los inputs del formulario de registrar ubicaciones
@@ -9,7 +13,7 @@ valorInputs.addEventListener('change', e => {
     const valorSeleccionado = parseInt(e.target.value);
 
     limpiarHTML();
-
+    // crea label e input mediante cada iteracion agregandola al contenedor divResultados
     for (var i = 1; i <= valorSeleccionado ; i++) {
 
         let div = document.createElement("div");
@@ -43,8 +47,18 @@ valorInputs.addEventListener('change', e => {
     }
 })
 
+// limpia el contenedor eliminado los elementos agregados mediante appendChild
 function limpiarHTML() {
     while (divResultados.firstChild) {
         divResultados.removeChild(divResultados.firstChild)
     }
 }
+
+//evento para mostrar la nueva ubicacion que se toma mediante el formulario
+formulario.addEventListener('submit', mostrarUbicacion)
+
+function mostrarUbicacion() {
+    
+}
+
+

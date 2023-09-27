@@ -26,8 +26,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["archivo_json"])) {
         exit();
     }
 
+    $guardar_archivo = $conexion;
+    $guardar_archivo = $guardar_archivo->prepare("INSERT INTO archivos(archivo) VALUES(:archivo)"); //con este metodo se evita la inyeccion sql
 
-    $query = $conexion->query("INSERT INTO conexiones (archivo) VALUES (:archivo)");
+    $marcadores=[
+        ":nombre"=>$nombre_archivo,
+
+    ];
+    $guardar_archivo->execute($marcadores);
+
+    if($guardar_archivo){
+        echo "Archivo subido correctamente";
+    }
+
+    $guardar_archivo = null;
     
 }
+
+
 ?>

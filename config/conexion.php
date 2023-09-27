@@ -1,9 +1,6 @@
 <?php 
-$host = "localhost"; 
-$dbname = "conexiones"; 
-$usuario = "root"; 
-$contraseña = ""; 
-
-// Establecer la conexión PDO
-$conexion = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $usuario, $contraseña);
+function conexion(){
+    $pdo = new PDO('mysql:host=localhost;dbname=conexiones','root',''); 
+    return $pdo;
+    }
 ?>

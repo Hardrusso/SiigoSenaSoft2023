@@ -1,3 +1,8 @@
+<?php require_once('config/main.php');
+if(isset($_SESSION['login'])){
+    $datos = $_SESSION['login'];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +15,6 @@
     <!-- cdns de alertify -->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/jquery_validate.js"></script>
     <!-- cdns de flowbite para modales -->
@@ -21,6 +25,9 @@
 
 <!-- Botones de apertura de modal -->
 <div class="flex justify-evenly items-center gap-2 m-3">
+    <?php if(isset($_SESSION['login'])): ?>
+        <p class="font-medium text-ls px-5 py-2.5 text-center">Bienvenido! <?= $datos['nombre'] ?></p>
+    <?php endif; ?>
     <button data-modal-target="registrar-ubicacion-modal" data-modal-toggle="registrar-ubicacion-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
         Registrar Nueva Ubicación
     </button>
@@ -32,13 +39,13 @@
         Registrarse
     </button>
     <button data-modal-target="login-modal" data-modal-toggle="login-modal" class="block text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-green-700 dark:focus:ring-green-800" type="button">
-        Login
+        Iniciar Sesion
     </button>
     <?php endif; ?>
     <?php if(isset($_SESSION['login'])): ?>
-        <button class="block text-white bg-red-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+    <a href="/config/cerrar_sesion.php?id='<?= $datos['id']?>'" class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
         Cerrar Sesion
-    </button>
+    </a>
     <?php endif; ?>
 </div>
 
@@ -121,7 +128,7 @@
             </button>
             <div class="px-6 py-6 lg:px-8">
                 <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Registrate</h3>
-                <form class="space-y-6" id="formulariologgin" method="POST" action="/config/registrar_user.php">
+                <form class="space-y-6" id="formularioRegister" method="POST" action="/config/registrar_user.php">
                     <div>
                         <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre Completo:</label>
                         <input type="text" name="nombre" id="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
@@ -136,13 +143,13 @@
                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">password:</label>
                         <input type="password" id="password" name="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                     </div>
-                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" id="EmpezarJuego">Ingresar</button>
+                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" id="registrarse">Ingresar</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
+<p class="text-white"></p>
 <!-- Modal para login -->
 <div id="login-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-md max-h-full">
@@ -155,7 +162,7 @@
             </button>
             <div class="px-6 py-6 lg:px-8">
                 <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Iniciar Sesion</h3>
-                <form class="space-y-6" id="formulariologgin">
+                <form class="space-y-6" id="formulariologin" method="POST" action="/config/login.php">
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo</label>
                         <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
@@ -165,7 +172,7 @@
                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">password</label>
                         <input type="password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                     </div>
-                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" id="EmpezarJuego">Ingresar</button>
+                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" id="loginBtn">Ingresar</button>
                 </form>
             </div>
         </div>

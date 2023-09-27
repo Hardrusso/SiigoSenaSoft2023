@@ -178,10 +178,10 @@ if(isset($_SESSION['login'])){
         </div>
     </div>
 </div>
-<div class="bg-[url('img/BG.png')] bg-cover flex m-auto h-[30rem] w-[70rem] border-slate-500 rounded-xl border-2" id="mapa"></div>
+<div class="bg-[url('img/BG.png')] bg-cover flex m-auto border-slate-500 rounded-xl border-2" id="mapa"></div>
 
 </body>
 </html>
-<script src="js/validacionFormularios.js"></script>
-<script src="js/app.js"></script>
 <script src="js/rutas.js"></script>
+<!-- <script src="js/validacionFormularios.js"></script>
+<script src="js/app.js"></script> -->

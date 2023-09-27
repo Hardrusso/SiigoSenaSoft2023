@@ -1,67 +1,51 @@
 //tomamos los vaores JSON que se guardaron en el localStorage
-const JsonStorage = localStorage.getItem('datos');
-const datosJSON = JSON.parse(JsonStorage);
+const datosJSON = JSON.parse( localStorage.getItem('datos'));
 
-document.addEventListener('DOMContentLoaded', ()=>{
+
+document.addEventListener('DOMContentLoaded', () => {
+    const mapa = document.getElementById('mapa');
     //llamado de las funciones
     mostrarELemento(datosJSON);
 })
 
-//se recibe y valida el archivo JSON que se cargo en el formulario
-document.getElementById('loadButton').addEventListener('click', function () {
-    const fileInput = document.getElementById('fileInput');
-    // Verifica si se seleccionó un archivo
-    if (fileInput.files.length === 0) {
-        alert('Por favor, seleccione un archivo JSON.');
-        return;
-    }
-    const selectedFile = fileInput.files[0];
-    // Verifica si el archivo seleccionado es un archivo JSON
-    if (selectedFile.type !== 'application/json') {
-        alert('El archivo seleccionado no es un archivo JSON válido.');
-        return;
-    }
-    const reader = new FileReader();
-    reader.onload = function (event) {
-        try {
-        const datosJSON = JSON.parse(event.target.result);
-        // Aquí puedes trabajar con el contenido JSON, por ejemplo, mostrarlo en la consola
-        const jsonString = JSON.stringify(datosJSON);
-        localStorage.setItem('datos', jsonString);
-        } catch (error) {
-        alert('Error al analizar el archivo JSON.');
-        }
-    };
-    reader.readAsText(selectedFile);
-    });
-
-
-
-
 // funciones
 function mostrarELemento(archivoJson){
     const {ubicaciones} = archivoJson
+    console.log(ubicaciones);
     ubicaciones.forEach(obj => {
-        const {nombre,posX, posY} = obj;
-        crearPunto(nombre,posX,posY);
+        const {nombre, posX, posY} = obj;
+        crearPunto(nombre, posX, posY);
     })
+}
+
+function crearPunto(nombre, posXPercentage, posYPercentage) {
+    
+    mapa.classList.add('h-[30rem]', 'w-[70rem]');
+    mapa.style.position = 'relative';
+
+    const nombrePos = document.createElement('p');
+    nombrePos.textContent = `${nombre}`;
+    nombrePos.classList.add('text-sm', 'mt-2');
+
+    const puntoRojo = document.createElement('div');
+    puntoRojo.className = 'red-dot';
+
+    // Convierte los porcentajes en píxeles basados en el tamaño del contenedor
+    const containerWidth = mapa.clientWidth;
+    const containerHeight = mapa.clientHeight;
+    const posX = (containerWidth * posXPercentage) / 100;
+    
+    const posY = (containerHeight * posYPercentage) / 100;
+
+    puntoRojo.style.position = 'absolute';
+    puntoRojo.style.left = posX + 'px';
+    puntoRojo.style.top = posY + 'px';
+    puntoRojo.appendChild(nombrePos);
+    mapa.appendChild(puntoRojo);
+    
     
 }
-function crearPunto(nombre, posX, posY) {
-    const mapa = document.getElementById('mapa');
-
-        const nombrePos = document.createElement('p')
-        nombrePos.textContent = `${nombre}`
-        nombrePos.classList.add('text-sm','mt-2')
-
-        const puntoRojo = document.createElement('div');
-            puntoRojo.className = 'red-dot';
-            puntoRojo.style.left = posX + 'px';
-            puntoRojo.style.top = posY + 'px';
-        puntoRojo.appendChild(nombrePos)
-        mapa.appendChild(puntoRojo);
-}
-
+crearPunto('Ubicaciones', 0, 0);
 
 function mostrarRuta(data, inicio) {
     const ubicaciones = data.ubicaciones;
@@ -116,7 +100,35 @@ function mostrarRuta(data, inicio) {
         ruta: ruta // Cambiamos esto de rutasUtilizadas a ruta
     };
 }
-const puntoInicio = "C"; // Cambia el punto de inicio según tus necesidades
-const resultado = mostrarRuta(datosJSON, puntoInicio);
-console.log("Distancias:", resultado.distancia);
-console.log("Ruta definitiva:", resultado.ruta);
+// const puntoInicio = "C"; // Cambia el punto de inicio según tus necesidades
+// const resultado = mostrarRuta(datosJSON, puntoInicio);
+// console.log("Distancias:", resultado.distancia);
+// console.log("Ruta definitiva:", resultado.ruta);
+
+//se recibe y valida el archivo JSON que se cargo en el formulario
+document.getElementById('loadButton').addEventListener('click', function () {
+    const fileInput = document.getElementById('fileInput');
+    // Verifica si se seleccionó un archivo
+    if (fileInput.files.length === 0) {
+        alert('Por favor, seleccione un archivo JSON.');
+        return;
+    }
+    const selectedFile = fileInput.files[0];
+    // Verifica si el archivo seleccionado es un archivo JSON
+    if (selectedFile.type !== 'application/json') {
+        alert('El archivo seleccionado no es un archivo JSON válido.');
+        return;
+    }
+    const reader = new FileReader();
+    reader.onload = function (event) {
+        try {
+        const datosJSON = JSON.parse(event.target.result);
+        // Aquí puedes trabajar con el contenido JSON, por ejemplo, mostrarlo en la consola
+        const jsonString = JSON.stringify(datosJSON);
+        localStorage.setItem('datos', jsonString);
+        } catch (error) {
+        alert('Error al analizar el archivo JSON.');
+        }
+    };
+    reader.readAsText(selectedFile);
+    });

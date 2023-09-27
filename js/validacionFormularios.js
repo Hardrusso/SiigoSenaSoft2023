@@ -9,14 +9,14 @@ $(document).ready(function(){
             posicionX:{
                 required:true,
                 number:true,
-                min:2,
-                max:1
+                minlength:1,
+                maxlength:3
             },
             posicionY:{
                 required:true,
                 number:true,
-                min:1,
-                max:2
+                minlength:1,
+                maxlength:3
             },
             peso:{
                 required:true,

@@ -2,11 +2,6 @@
 const valorInputs = document.getElementById('conx');
 const divResultados = document.getElementById('mostrarResultados');
 //variables para tomar las pocisiones de las nuevas ubicaciones
-const formulario = document.getElementById('formularioUbicacion');
-const pocisionX = document.getElementById('posX');
-const pocisionY = document.getElementById('posY');
-
-
 
 //funcion para la creacion de los inputs del formulario de registrar ubicaciones
 valorInputs.addEventListener('change', e => {
@@ -53,6 +48,9 @@ function limpiarHTML() {
         divResultados.removeChild(divResultados.firstChild)
     }
 }
+
+
+
 
 
 

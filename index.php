@@ -31,6 +31,9 @@ if(isset($_SESSION['login'])){
     <button data-modal-target="registrar-ubicacion-modal" data-modal-toggle="registrar-ubicacion-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
         Registrar Nueva Ubicación
     </button>
+    <button data-modal-target="crearConexion-modal" data-modal-toggle="crearConexion-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+        Crear Conexion
+    </button>
     <button data-modal-target="cargar-archivo-modal" data-modal-toggle="cargar-archivo-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
         Subir Archivo JSON
     </button>
@@ -64,28 +67,18 @@ if(isset($_SESSION['login'])){
                 <form class="space-y-6" id="formularioUbicacion">
                     <div>
                         <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                        <input type="text" id="nombre" name="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
                     </div>
                     <div>
                         <label for="posX" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Posición en X</label>
-                        <input type="text" id="posX" name="posicionX" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                        <input type="text" id="posX" name="posicionX" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
                     </div>
                     <div>
                         <label for="posY" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Posición en Y</label>
-                        <input type="text" id="posY" name="posicionY" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                        <input type="text" id="posY" name="posicionY" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
                     </div>
-                    <div>
-                        <label for="conx" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conexión</label>
-                        <select type="text" name="Nconexiones" id="conx" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
-                            <option value="">Seleccione:</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
-                    </div>
-                    <div id="mostrarResultados"></div>           
-                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" id="EmpezarJuego">Registrar</button>
+
+                    <button type="submit" id="registrarUbicacion" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Registrar</button>
                 </form>
             </div>
         </div>
@@ -149,6 +142,42 @@ if(isset($_SESSION['login'])){
         </div>
     </div>
 </div>
+
+<!-- Modal para crear Conexion -->
+<div id="crearConexion-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-md max-h-full">
+        <!-- contenido del modal de registro de usuarios-->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="crearConexion-modal">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+            </button>
+            <div class="px-6 py-6 lg:px-8">
+                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Registrate</h3>
+                <form class="space-y-6" id="formularioConexion" method="POST" action="/config/registrar_user.php">
+                    <div>
+                    <label for="conexionA" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Punto Inicial:</label>
+                        <select class="" name="conexionA" id="conexionA">
+                            <option value="">Seleccione una Opcion</option>
+                        </select>
+                    </div>
+                    <div>
+                    <label for="conexionB" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Punto Final:</label>
+                        <select name="conexionB" id="conexionB">
+                        <option value="">Seleccione una Opcion</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="peso" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Peso:</label>
+                        <input type="submit" id="peso" name="peso" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                    </div>
+                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" id="registrarse">Ingresar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <p class="text-white"></p>
 <!-- Modal para login -->
 <div id="login-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -186,6 +215,8 @@ if(isset($_SESSION['login'])){
 
 </body>
 </html>
-<script src="js/validacionFormularios.js"></script>
-<script src="js/app.js"></script>
+<!-- <script src="js/validacionFormularios.js"></script> -->
+<!-- <script src="js/app.js"></script> -->
 <script src="js/mostrarPuntos.js"></script>
+
+

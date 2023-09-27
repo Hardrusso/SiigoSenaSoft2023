@@ -182,6 +182,6 @@ if(isset($_SESSION['login'])){
 
 </body>
 </html>
-<script src="/js/validacionFormularios.js"></script>
+<script src="js/validacionFormularios.js"></script>
 <script src="js/app.js"></script>
 <script src="js/rutas.js"></script>

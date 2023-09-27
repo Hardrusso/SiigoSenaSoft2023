@@ -8,14 +8,14 @@ $(document).ready(function(){
             posicionX:{
                 required:true,
                 number:true,
-                min:0,
-                max:2
+                minlength:1,
+                maxlength:3
             },
             posicionY:{
                 required:true,
                 number:true,
-                min:0,
-                max:2
+                minlength:1,
+                maxlength:3
             },
             peso:{
                 required:true,

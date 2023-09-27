@@ -73,8 +73,7 @@ function crearELemento(posX, posY,nombre){
     mapa.appendChild(puntoRojo);
 }
 
-crearELemento(25,45,'eduar');
-crearELemento(55,65,'jonathan');
+
 
 
 

@@ -1,4 +1,14 @@
 <?php
+
+if(!isset($_SESSION)){
+    session_start();
+} 
+
+function conexion(){
+    $pdo = new PDO('mysql:host=localhost;dbname=conexiones','root',''); 
+    return $pdo;
+}
+
 //sirve para limpiar cadenas de texto 
 function limpiar_cadena($cadena){
         $cadena = trim($cadena);      // la funcion trim elimina espacios en blanco del inicio o al final de la cadena

@@ -1,51 +1,30 @@
 //tomamos los vaores JSON que se guardaron en el localStorage
 const datosJSON = JSON.parse( localStorage.getItem('datos'));
 
+// Obtén una referencia al canvas y su contexto
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 
-document.addEventListener('DOMContentLoaded', () => {
-    const mapa = document.getElementById('mapa');
-    //llamado de las funciones
-    mostrarELemento(datosJSON);
-})
+// Función para dibujar las ubicaciones en el canvas
+function dibujarUbicaciones(ubicaciones) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpiar el canvas
 
-// funciones
-function mostrarELemento(archivoJson){
-    const {ubicaciones} = archivoJson
-    console.log(ubicaciones);
-    ubicaciones.forEach(obj => {
-        const {nombre, posX, posY} = obj;
-        crearPunto(nombre, posX, posY);
-    })
+    for (const ubicacion of ubicaciones) {
+        // Dibujar un círculo en las coordenadas posX y posY
+        ctx.beginPath();
+        ctx.arc(ubicacion.posX, ubicacion.posY, 5, 0, Math.PI * 2);
+        ctx.fillStyle = "blue"; // Puedes cambiar el color aquí
+        ctx.fill();
+        ctx.closePath();
+
+        // Etiquetar la ubicación
+        ctx.fillStyle = "black"; // Color del texto
+        ctx.font = "12px Arial"; // Tamaño y tipo de fuente
+        ctx.fillText(ubicacion.nombre, ubicacion.posX - 5, ubicacion.posY - 10);
+    }
 }
-
-function crearPunto(nombre, posXPercentage, posYPercentage) {
-    
-    mapa.classList.add('h-[30rem]', 'w-[70rem]');
-    mapa.style.position = 'relative';
-
-    const nombrePos = document.createElement('p');
-    nombrePos.textContent = `${nombre}`;
-    nombrePos.classList.add('text-sm', 'mt-2');
-
-    const puntoRojo = document.createElement('div');
-    puntoRojo.className = 'red-dot';
-
-    // Convierte los porcentajes en píxeles basados en el tamaño del contenedor
-    const containerWidth = mapa.clientWidth;
-    const containerHeight = mapa.clientHeight;
-    const posX = (containerWidth * posXPercentage) / 100;
-    
-    const posY = (containerHeight * posYPercentage) / 100;
-
-    puntoRojo.style.position = 'absolute';
-    puntoRojo.style.left = posX + 'px';
-    puntoRojo.style.top = posY + 'px';
-    puntoRojo.appendChild(nombrePos);
-    mapa.appendChild(puntoRojo);
-    
-    
-}
-crearPunto('Ubicaciones', 0, 0);
+// Llama a la función para dibujar las ubicaciones
+dibujarUbicaciones(datosJSON.ubicaciones);
 
 function mostrarRuta(data, inicio) {
     const ubicaciones = data.ubicaciones;

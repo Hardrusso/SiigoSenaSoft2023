@@ -1,14 +1,18 @@
-
+//Se definen la constantes a usar
 const formulario = document.getElementById('formularioUbicacion');
 const formularioConex = document.getElementById('formularioConexion');
-
+const selectPunto = document.getElementById('conexionInicial');
+const borrarStorage = document.getElementById('borrarStorage');
 
 document.addEventListener('DOMContentLoaded', () => {
+    borrarStorage.addEventListener('click', deleteStorage)
     formularioConex.addEventListener('submit', tomarConexion)
     formulario.addEventListener('submit', tomarUbicacion);
     cargarRutas();
+    mostrarConexiones();
 })
 
+//funcion para dibujar los puntos y las rutas
 function cargarRutas(){
     const data = JSON.parse( localStorage.getItem('datos'));
     // Obtener el canvas y su contexto
@@ -50,13 +54,29 @@ function cargarRutas(){
     });
 }
 
-// Escuchar el evento de envío del formulario
-function tomarUbicacion() {
-    const data = JSON.parse( localStorage.getItem('datos'));
+// funcion para crear nuevos puntos de ubicacion
+function tomarUbicacion(e) {
+    let data = JSON.parse(localStorage.getItem('datos'));
+
+    if (data === null) {
+        data = {
+            "ubicaciones": [],
+            "conexiones": []
+        };
+    
+        const jsonString = JSON.stringify(data);
+        localStorage.setItem('datos', jsonString);
+    }
     // Obtener los valores de los campos del formulario
     let nombre = formulario.elements.nombre.value;
     let posX = formulario.elements.posicionX.value;
     let posY = formulario.elements.posicionY.value;
+
+    if(nombre === "" || posX === "" || posY === ""){
+        e.preventDefault()
+        alert('Define todos los campos');
+        return;
+    }
 
     // Crear un objeto con los valores del formulario
     let nuevaUbicacion = {
@@ -68,15 +88,25 @@ function tomarUbicacion() {
 
     const jsonString = JSON.stringify(data);
     localStorage.setItem('datos', jsonString);
-    
 }
 
-function tomarConexion() {
+//funcion para crear conexiones entre los puntos
+function tomarConexion(e) {
     const data = JSON.parse( localStorage.getItem('datos'));
     let conxA = formularioConex.elements.conexionA.value;
     let conxB = formularioConex.elements.conexionB.value;
     let peso = formularioConex.elements.peso.value;
 
+    if(peso === "" ){
+        e.preventDefault()
+        alert('Define todos los campos');
+        return;
+    }
+    if(isNaN(peso)){
+        e.preventDefault()
+        alert('El peso no esta Definido correctamente');
+        return;
+    }
     // Crear un objeto con los valores del formulario
     let nuevaConexion = {
         "ubicacion1": conxA,
@@ -89,6 +119,7 @@ function tomarConexion() {
     localStorage.setItem('datos', jsonString);
 }
 
+// muestra todas las ubicaciones en los respectivos selects
 function mostrarConexiones() {
     const selectConxA = document.getElementById('conexionA');
     const selectConxB = document.getElementById('conexionB');
@@ -110,6 +141,20 @@ function mostrarConexiones() {
 
     selectConxA.appendChild(option);
     });
+
+    data.ubicaciones.forEach(function(ubicacion) {
+        var option = document.createElement("option");
+        option.value = ubicacion.nombre;
+        option.text = ubicacion.nombre;
+
+        selectPunto.appendChild(option);
+    });
 }
-mostrarConexiones();
+//funcion para borrar el localStorage
+function deleteStorage() {
+    const confirmar = confirm('Desea eliminar las ubicaciones?');
+    if(confirmar){
+        localStorage.removeItem('datos');
+    }
+}
 

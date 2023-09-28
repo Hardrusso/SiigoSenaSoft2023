@@ -34,12 +34,13 @@ $check_email=null;
 $clave=password_hash($clave, PASSWORD_BCRYPT,["cost"=>10]);
 
 $guardar_usuario= conexion();
-    $guardar_usuario=$guardar_usuario->prepare("INSERT INTO usuarios(nombre,email, password) VALUES(:nombre,:email,:password)"); 
+    $guardar_usuario=$guardar_usuario->prepare("INSERT INTO usuarios(nombre,email, password,estado) VALUES(:nombre,:email,:password,:estado)"); 
 
     $marcadores=[
         ":nombre"=>$nombre,
         ":email"=>$email,
-        ":password"=>$clave
+        ":password"=>$clave,
+        "estado"=> "inactivo"
     ];
     $guardar_usuario->execute($marcadores);
 

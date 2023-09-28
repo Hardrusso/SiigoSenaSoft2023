@@ -16,7 +16,7 @@ document.getElementById('loadButton').addEventListener('click', function () {
     reader.onload = function (event) {
         try {
         const datosJSON = JSON.parse(event.target.result);
-        // Aquí puedes trabajar con el contenido JSON, por ejemplo, mostrarlo en la consola
+        
         const jsonString = JSON.stringify(datosJSON);
         localStorage.setItem('datos', jsonString);
         } catch (error) {

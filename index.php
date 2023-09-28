@@ -67,15 +67,15 @@ if(isset($_SESSION['login'])){
                 <form class="space-y-6" id="formularioUbicacion">
                     <div>
                         <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                        <input type="text" id="nombre" name="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                     </div>
                     <div>
-                        <label for="posX" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Posición en X</label>
-                        <input type="text" id="posX" name="posicionX" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                        <label for="posX" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Posición en X</label> 
+                        <input type="text" id="posX" name="posicionX" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                     </div>
                     <div>
                         <label for="posY" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Posición en Y</label>
-                        <input type="text" id="posY" name="posicionY" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                        <input type="text" id="posY" name="posicionY" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                     </div>
 
                     <button type="submit" id="registrarUbicacion" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Registrar</button>
@@ -109,7 +109,7 @@ if(isset($_SESSION['login'])){
     </div>
 </div>
 
-<!-- Modal para registrarse -->
+<!-- Modal para registrar usuarios -->
 <div id="register-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-md max-h-full">
         <!-- contenido del modal de registro de usuarios-->
@@ -157,13 +157,13 @@ if(isset($_SESSION['login'])){
                 <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Crear Conexion</h3>
                 <form class="space-y-6" id="formularioConexion">
                     <div>
-                    <label for="conexionA" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Punto Inicial:</label>
-                        <select class="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-indigo-600 p-2" name="conexionA" id="conexionA">
+                        <label for="conexionA" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Punto Inicial:</label>
+                        <select class="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-indigo-600 p-2" name="conexionA" id="conexionA" >
                             <option value="">Seleccione una Opcion</option>
                         </select>
                     </div>
                     <div>
-                    <label for="conexionB" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Punto Final:</label>
+                        <label for="conexionB" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Punto Final:</label>
                         <select class="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-indigo-600 p-2" name="conexionB" id="conexionB">
                         <option value="">Seleccione una Opcion</option>
                         </select>
@@ -207,12 +207,26 @@ if(isset($_SESSION['login'])){
         </div>
     </div>
 </div>
-<div class="bg-[url('img/BG.png')] bg-cover flex m-auto h-[30rem] w-[70rem] border-slate-500 rounded-xl border-2" id="mapa">
+<div class="bg-[url('img/BG.png')] bg-cover flex m-auto h-[30rem] w-[70rem] border-slate-500 rounded-xl border-2 mb-6" id="mapa">
     <div id="canvas-container">
         <canvas id="canvas" width="1000" height="600"></canvas>
     </div>
 </div>
-
+<div class="w-10/12 flex m-auto flex-col p-4 bg-blue-200 rounded-xl">
+    <div class="flex flex-col">
+        <label for="conexionB" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Calcular Rutas:</label>
+        <select class="block w-52 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-indigo-600 p-2" name="conexionInicial" id="conexionInicial">
+        <option value="">Seleccione una Opcion</option>
+        </select>
+    </div>
+    <div class="flex w-full bg-white p-4 mt-4 justify-between">
+        <div id="distancias" class=""></div>
+        <div id="rutas"></div>
+    </div>
+    <a href="index.php" id="borrarStorage" class="block w-36 mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+            Reiniciar
+    </a>
+</div>
 </body>
 </html>
 <script src="js/validacionFormularios.js"></script>

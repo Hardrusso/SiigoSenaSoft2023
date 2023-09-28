@@ -154,25 +154,25 @@ if(isset($_SESSION['login'])){
                 </svg>
             </button>
             <div class="px-6 py-6 lg:px-8">
-                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Registrate</h3>
-                <form class="space-y-6" id="formularioConexion" method="POST" action="/config/registrar_user.php">
+                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Crear Conexion</h3>
+                <form class="space-y-6" id="formularioConexion">
                     <div>
                     <label for="conexionA" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Punto Inicial:</label>
-                        <select class="" name="conexionA" id="conexionA">
+                        <select class="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-indigo-600 p-2" name="conexionA" id="conexionA">
                             <option value="">Seleccione una Opcion</option>
                         </select>
                     </div>
                     <div>
                     <label for="conexionB" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Punto Final:</label>
-                        <select name="conexionB" id="conexionB">
+                        <select class="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-indigo-600 p-2" name="conexionB" id="conexionB">
                         <option value="">Seleccione una Opcion</option>
                         </select>
                     </div>
                     <div>
                         <label for="peso" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Peso:</label>
-                        <input type="submit" id="peso" name="peso" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                        <input type="text" id="peso" name="peso" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                     </div>
-                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" id="registrarse">Ingresar</button>
+                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Crear</button>
                 </form>
             </div>
         </div>
@@ -215,8 +215,9 @@ if(isset($_SESSION['login'])){
 
 </body>
 </html>
-<!-- <script src="js/validacionFormularios.js"></script> -->
-<!-- <script src="js/app.js"></script> -->
+<script src="js/validacionFormularios.js"></script>
+<script src="js/recibirJSON.js"></script>
 <script src="js/mostrarPuntos.js"></script>
+<script src="js/rutas.js"></script>
 
 

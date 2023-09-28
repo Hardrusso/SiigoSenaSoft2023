@@ -1,12 +1,11 @@
 
 const formulario = document.getElementById('formularioUbicacion');
 const formularioConex = document.getElementById('formularioConexion');
-const selectConxA = document.getElementById('conexionA');
-const selectConxB = document.getElementById('conexionB');
+
 
 document.addEventListener('DOMContentLoaded', () => {
+    formularioConex.addEventListener('submit', tomarConexion)
     formulario.addEventListener('submit', tomarUbicacion);
-    
     cargarRutas();
 })
 
@@ -72,59 +71,45 @@ function tomarUbicacion() {
     
 }
 
-// function tomarConexion() {
-//     const data = JSON.parse( localStorage.getItem('datos'));
-//     let conxA = formulario.elements.conexionA.value;
-//     let conxB = formulario.elements.conexionB.value;
-//     let peso = formulario.elements.peso.value;
+function tomarConexion() {
+    const data = JSON.parse( localStorage.getItem('datos'));
+    let conxA = formularioConex.elements.conexionA.value;
+    let conxB = formularioConex.elements.conexionB.value;
+    let peso = formularioConex.elements.peso.value;
 
-//     // Crear un objeto con los valores del formulario
-//     let nuevaConexion = {
-//         "ubicacion1": conxA,
-//         "ubicacion2": conxB,
-//         "peso": parseInt(peso)
-//     };
-//     data.ubicaciones.push(nuevaConexion);
-
-//     const jsonString = JSON.stringify(data);
-//     localStorage.setItem('datos', jsonString);
-// }
-
-// function mostrarConexiones() {
-//     // Iterar a través del arreglo de ubicaciones y agregar opciones al select
-//     data.ubicaciones.forEach(function(ubicacion) {
-//     var option = document.createElement("option");
-//     option.value = ubicacion.nombre;
-//     option.text = ubicacion.nombre;
-//     selectConxA.appendChild(option);
-//     selectConxB.appendChild(option);
-//     });
-// }
-
-//se recibe y valida el archivo JSON que se cargo en el formulario
-document.getElementById('loadButton').addEventListener('click', function () {
-    const fileInput = document.getElementById('fileInput');
-    // Verifica si se seleccionó un archivo
-    if (fileInput.files.length === 0) {
-        alert('Por favor, seleccione un archivo JSON.');
-        return;
-    }
-    const selectedFile = fileInput.files[0];
-    // Verifica si el archivo seleccionado es un archivo JSON
-    if (selectedFile.type !== 'application/json') {
-        alert('El archivo seleccionado no es un archivo JSON válido.');
-        return;
-    }
-    const reader = new FileReader();
-    reader.onload = function (event) {
-        try {
-        const datosJSON = JSON.parse(event.target.result);
-        // Aquí puedes trabajar con el contenido JSON, por ejemplo, mostrarlo en la consola
-        const jsonString = JSON.stringify(datosJSON);
-        localStorage.setItem('datos', jsonString);
-        } catch (error) {
-        alert('Error al analizar el archivo JSON.');
-        }
+    // Crear un objeto con los valores del formulario
+    let nuevaConexion = {
+        "ubicacion1": conxA,
+        "ubicacion2": conxB,
+        "peso": parseInt(peso)
     };
-    reader.readAsText(selectedFile);
+    data.conexiones.push(nuevaConexion);
+
+    const jsonString = JSON.stringify(data);
+    localStorage.setItem('datos', jsonString);
+}
+
+function mostrarConexiones() {
+    const selectConxA = document.getElementById('conexionA');
+    const selectConxB = document.getElementById('conexionB');
+
+    const data = JSON.parse( localStorage.getItem('datos'));
+    // Iterar a través del arreglo de ubicaciones y agregar opciones al select
+    data.ubicaciones.forEach(function(ubicacion) {
+        var option = document.createElement("option");
+        option.value = ubicacion.nombre;
+        option.text = ubicacion.nombre;
+
+    selectConxB.appendChild(option);
     });
+
+    data.ubicaciones.forEach(function(ubicacion) {
+        var option = document.createElement("option");
+        option.value = ubicacion.nombre;
+        option.text = ubicacion.nombre;
+
+    selectConxA.appendChild(option);
+    });
+}
+mostrarConexiones();
+

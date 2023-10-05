@@ -48,6 +48,7 @@ function limpiarHTML() {
 }
 
 //funcion del algoritmo
+
 function calcularDistanciasYRutasDesdeInicio(data, inicio) {
     const ubicaciones = data.ubicaciones;
     const conexiones = data.conexiones;

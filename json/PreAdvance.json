@@ -1,0 +1,107 @@
+{
+  "ubicaciones": [
+    {
+      "nombre": "Pedro",
+      "posX": 130,
+      "posY": 260
+    },
+    {
+      "nombre": "Karla",
+      "posX": 80,
+      "posY": 220
+    },
+    {
+      "nombre": "Samuel",
+      "posX": 130,
+      "posY": 180
+    },
+    {
+      "nombre": "Fernando",
+      "posX": 190,
+      "posY": 180
+    },
+    {
+      "nombre": "Camila",
+      "posX": 240,
+      "posY": 150
+    },
+    {
+      "nombre": "Hector",
+      "posX": 240,
+      "posY": 220
+    },
+    {
+      "nombre": "Manuel",
+      "posX": 290,
+      "posY": 220
+    },
+    {
+      "nombre": "Ana",
+      "posX": 330,
+      "posY": 260
+    }
+  ],
+  "conexiones": [
+    {
+      "ubicacion1": "Pedro",
+      "ubicacion2": "Karla",
+      "peso": 10
+    },
+    {
+      "ubicacion1": "Karla",
+      "ubicacion2": "Samuel",
+      "peso": 5
+    },
+    {
+      "ubicacion1": "Samuel",
+      "ubicacion2": "Ana",
+      "peso": 70
+    },
+    {
+      "ubicacion1": "Samuel",
+      "ubicacion2": "Fernando",
+      "peso": 12
+    },
+    {
+      "ubicacion1": "Fernando",
+      "ubicacion2": "Hector",
+      "peso": 7
+    },
+    {
+      "ubicacion1": "Fernando",
+      "ubicacion2": "Camila",
+      "peso": 3
+    },
+    {
+      "ubicacion1": "Hector",
+      "ubicacion2": "Manuel",
+      "peso": 12
+    },
+    {
+      "ubicacion1": "Manuel",
+      "ubicacion2": "Ana",
+      "peso": 18
+    },
+    {
+      "ubicacion1": "Pedro",
+      "ubicacion2": "Ana",
+      "peso": 60
+    },
+    {
+      "ubicacion1": "Pedro",
+      "ubicacion2": "Hector",
+      "peso": 12
+    },
+    {
+      "ubicacion1": "Pedro",
+      "ubicacion2": "Fernando",
+      "peso": 20
+    },
+    {
+      "ubicacion1": "Camila",
+      "ubicacion2": "Hector",
+      "peso": 5
+    }
+  ],
+  "inicio": "Hector"
+}
